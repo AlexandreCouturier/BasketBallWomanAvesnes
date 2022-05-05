@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creation d'une équipe{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<form class="row row-cols-lg-auto g-3 align-items-center" action="{{path('app_team_create')}}" method="post">
+  <div class="col-12">
+    <label class="visually-hidden" for="teamname">TeamName</label>
+    <div class="input-group">
+      <div class="input-group-text">@</div>
+      <input type="text" class="form-control" name="teamname"id="teamname" placeholder="Nom de l'équipe" />
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label class="visually-hidden" for="year">Année de l'équipe</label>
+    <select class="select" name="year">
+      <option value="2020/2021">2020/2021</option>
+      <option value="2021/2022">2021/2022</option>
+      <option value="2022/2023">2022/2023</option>
+      <option value="2023/2024">2023/2024</option>
+      <option value="2024/2025">2024/2025</option>
+      <option value="2025/2026">2025/2026</option>
+      <option value="2026/2027">2026/2027</option>
+      <option value="2027/2028">2027/2028</option>
+    </select>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Création de l'équipe</button>
+  </div>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creation d'une joueuse!{% endblock %}
+
+{% block body %}
+<form action="{{path('app_player_create')}}" method="post">
+
+<div class="row">
+  <div class="col">
+    <!-- Name input -->
+    <div class="form-outline">
+        <label class="form-label" for="firstname" >Prénom</label>
+        <input type="text" id="" class="form-control" name="firstname"/>
+    </div>
+  </div>
+  <div class="col">
+    <!-- Email input -->
+    <div class="form-outline">
+      <label class="form-label" for="lastname" >Nom</label>
+      <input type="text" id="" class="form-control" name="lastname"/>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="col">
+    <!-- Name input -->
+    <div class="form-outline">
+      <label class="form-label" for="age">Age</label>
+      <input type="number" id="" class="form-control" name="age"/>
+    </div>
+  </div>
+  <div class="col">
+    <!-- Name input -->
+    <div class="form-outline">
+      <label class="form-label" for="postgame">Poste de la joueuse</label>
+      <input type="text" id="" class="form-control" name="postgame"/>
+    </div>
+  </div>
+</div>
+  <div class="col-12">
+    <label class="visually-hidden" for="teamname">Année de l'équipe</label>
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="teamname">
+             {% for team in team %}
+                 <option value="{{team.id}}">{{team.teamname}}</option>
+            {% endfor %}
+         </select>
+  </div>
+    <div class="col-12">
+    <button type="submit" class="btn btn-primary">Ajouter la joueuse</button>
+  </div>
+  </form>
+{% endblock %}
