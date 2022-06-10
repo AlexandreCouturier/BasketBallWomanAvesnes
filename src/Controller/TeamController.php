@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Team;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +30,7 @@ public function showAllTeam(TeamRepository $repo): Response{
     return $this->render('team/index.html.twig', compact('team'));
 }
         /**
- * @Route("/team/id/{id}", name="app_team_by_id")method={"GET"}
+ * @Route("/team/id/{id}", name="")method={"GET"}
  */
 public function showTeamById(Team $team): Response{
     return $this->render('team/teamById.html.twig', compact('team'));
@@ -47,8 +48,27 @@ public function showTeamById(Team $team): Response{
             $em->persist($team);
             $em->flush();
 
-            return $this->redirectToRoute('app_allteams');
+            return $this->redirectToRoute('app_allteam_in_dashboard');
         }
         return $this->render('team/FormTeam.html.twig');
+    }
+                                        /**
+     * @Route("/player/delete/{id}", name="app_player_delete")method={"GET","POST"}
+     */
+
+    public function deletegame(ManagerRegistry $doctrine, int $id): Response{
+        $entityManager = $doctrine->getManager();
+        $product = $entityManager->getRepository(Player::class)->find($id);
+
+           if(!$product) {
+               throw $this->createNotFoundException(
+                   "le player n'a pas été trouvé" .$id
+               );
+           }
+
+           $entityManager->remove($product);
+           $entityManager->flush();
+
+           return $this->redirectToRoute('app_allplayers');
     }
 }

@@ -1,0 +1,55 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h5 class="text-white h4">Collapsed content</h5>
+      <span class="text-muted">Toggleable via the navbar brand.</span>
+    </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>
+<div class="col-12 d-flex justify-content-center">
+    {{ form_start(form) }}
+    <div class="row">
+    <div class="col-6">
+        {{ form_row(form.Firstname, {'label': 'Nom d\'utilisateur', 'attr':{'placeholder': 'Nom d\'utilisateur','class':'form-control'}}) }}
+    </div>
+        <div class="col-6">
+                {{ form_row(form.Lastname, {'label': 'Nom de famille', 'attr':{'placeholder': 'Nom de famille','class':'form-control'}}) }} 
+    </div>
+</div>
+    <div class="row">
+    <div class="col-6">
+            {{ form_row(form.NumberAddress, {'label': 'Numéro d\'adresse', 'attr':{'placeholder': 'Numéro d\'adresse','class':'form-control'}}) }} 
+    </div>
+        <div class="col-6">
+                {{ form_row(form.Address, {'label': 'Adresse', 'attr':{'placeholder': 'Adresse','class':'form-control'}}) }} 
+    </div>
+</div>
+    <div class="row">
+  <div class="col-6">
+          {{ form_row(form.City, {'label': 'Ville', 'attr':{'placeholder': 'Ville','class':'form-control'}}) }} 
+    </div>
+        <div class="col-6">
+                {{ form_row(form.Zip, {'label': 'Code Postale', 'attr':{'placeholder': 'Code Postale','class':'form-control'}}) }} 
+    </div>
+</div>
+        {{ form_row(form.Email, {'label': 'Email', 'attr':{'placeholder': 'Entre votre Email','class':'form-control'}}) }} 
+        {{ form_row(form.Password, {'label': 'Mot de passe', 'attr':{'placeholder': 'Mot de passe','class':'form-control'}}) }} 
+        {{ form_row(form.Confirm_password, {'label': 'Confirmation mot de passe', 'attr':{'placeholder': 'Confirmation mot de passe','class':'form-control'}}) }} 
+
+
+
+
+<div class="col-12 row d-grid gap-2 col-6 mx-auto mt-3">
+    <button type="submit" class="btn btn-success"> Valider votre inscription </button> 
+    </div>  
+    {{ form_end(form) }}  
+    </div>
+{% endblock %}

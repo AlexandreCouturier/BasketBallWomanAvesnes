@@ -7,6 +7,7 @@ use App\Entity\Team;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class PlayerController extends AbstractController
         ]);
     }
             /**
-            * @Route("/playerall/create", name="app_allteam_in_player")
+            * @Route("/dashboard/equipe/createPlayer", name="app_allteam_in_player")
             */
             public function showAllTeamInPlayer(TeamRepository $repo): Response{
                 $team = $repo->findAll();
@@ -44,7 +45,7 @@ class PlayerController extends AbstractController
             return $this->render('player/playerById.html.twig', compact('player'));
         }
         /**
-     * @Route("/player/create", name="app_player_create")
+     * @Route("/dashboard/equipe/createplay", name="app_player_create")
      */
     public function createPlayer(Request $request,EntityManagerInterface $em): Response {
 
@@ -63,9 +64,11 @@ class PlayerController extends AbstractController
             $em->persist($player);
             $em->flush();
 
-            return $this->redirectToRoute('app_allplayers');
+            return $this->redirectToRoute('app_allteam_in_dashboard');
         }
 
         return $this->render('player/FormPlayer.html.twig');
     }
+    
+
 }
