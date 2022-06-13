@@ -4,11 +4,14 @@ namespace App\Entity;
 
 use App\Repository\UsersRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -32,8 +35,27 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(min=8, minMessage="Votre mot de passe doit contenir au minumun 8 caractères")
+     * @Assert\EqualTo(propertyPath="Confirm_Password", message="Les mots de passe ne sont pas identiques")
      */
     private $password;
+       /**
+     * @Assert\EqualTo(propertyPath="Password", message="Les mots de passe ne sont pas identiques")
+     */
+    private $Confirm_Password;
+
+    public function getConfirmPassword(): ?string
+    {
+        return $this->Confirm_Password;
+    }
+
+    public function setConfirmPassword(string $Confirm_Password): self
+    {
+        $this->Confirm_Password = $Confirm_Password;
+
+        return $this;
+    }
+
 
     public function getId(): ?int
     {

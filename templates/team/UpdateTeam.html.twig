@@ -3,6 +3,7 @@
 {% block title %}Creation d'une équipe{% endblock %}
 
 {% block body %}
+{% if app.user %}
 <div class="container-fluid">
 <form class="row row-cols-lg-auto g-3 align-items-center" action="{{path('app_team_update',{id:team.id})}}" method="post">
   <div class="col-12">
@@ -32,4 +33,24 @@
   </div>
 </form>
 </div>
+{% else %}
+<div class="container">
+<div class="col-12 d-flex justify-content-center align-items-center">
+    <div class="row">
+        <div class="col-md-12 d-flex flex-column align-items-center text-center justify-content-center">
+            <div class="error-template ">
+                <h2>Désolé!</h2>
+                <div class="error-details">
+                   <h4> ceci est réservé aux personnes avec un compte ! </h4>
+                </div>
+                <div class="error-actions d-flex justify-content-around">
+                    <a href="{{path('app_register')}}" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                        Inscription </a><a href="{{path('app_login')}}" class="btn btn-primary btn-lg"> Connexion </a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endif %}
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Player;
 use App\Entity\Team;
 use App\Repository\PlayerRepository;
 use App\Repository\TeamRepository;
+use App\Repository\UsersRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,21 +20,12 @@ class HomeController extends AbstractController
     /**
      * @Route("/dashboard", name="app_home")
      */
-    public function index(): Response
+    public function index(UsersRepository $repo): Response
     {
-        return $this->render('home/dashboard.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        $users = $repo->findAll();
+        return $this->render('home/dashboard.html.twig', compact('users'));
     }
-        /**
-     * @Route("", name="app_home_equipe")
-     */
-    public function EquipeDashboard(): Response
-    {
-        return $this->render('home/equipeDashboard.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+  
                 /**
      * @Route("/dashboard/equipe/id/{id}", name="app_team_by_id")method={"GET"}
      */
